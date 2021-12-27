@@ -1,0 +1,2 @@
+# Habilita la conexión con la base de datos de los usuarios de Discord
+DiscordConnection: false

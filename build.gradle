@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'es.a223'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    implementation('org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT')
+}
+
+test {
+    useJUnitPlatform()
+}

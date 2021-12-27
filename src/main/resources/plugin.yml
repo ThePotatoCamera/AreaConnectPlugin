@@ -1,0 +1,23 @@
+name: 'AreaConnect'
+version: '1.0.0'
+api-version: '1.18'
+author: 'ThePotatoCamera'
+website: 'https://discord.a223.es'
+main: 'es.a223.areaconnect.AreaConnect'
+commands:
+  areaconnect:
+    description: 'Gestionar el plugin de AreaConnect'
+    aliases:
+      - area-connect
+      - a223
+    usage: /<command> [reload]
+    permission: areaconnect.reload
+permissions:
+  areaconnect.*:
+    description: 'Acceso adminstrativo del plugin'
+    default: op
+    children:
+      - areaconnect.reload
+  areaconnect.reload:
+    description: 'Permite recargar el plugin'
+    default: op
