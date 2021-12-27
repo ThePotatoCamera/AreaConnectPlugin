@@ -25,7 +25,7 @@ public class CommandManager implements CommandExecutor {
             if (args.length == 0) {
                 player.sendMessage(ChatColor.YELLOW + "Comandos disponibles:");
                 for (SubCommand subCommand : subCommands) {
-                    player.sendMessage(ChatColor.YELLOW + "/" + subCommand.getName() + ": " + ChatColor.WHITE + subCommand.getDescription());
+                    player.sendMessage(ChatColor.YELLOW + "/areaconnect " + subCommand.getName() + ": " + ChatColor.WHITE + subCommand.getDescription());
                 }
             }
             else {
