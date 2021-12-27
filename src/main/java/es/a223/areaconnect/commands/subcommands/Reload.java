@@ -12,7 +12,7 @@ public class Reload extends SubCommand {
 
     @Override
     public String getDescription() {
-        return "Recarga los archivos de configuración";
+        return "Recarga los archivos de configuracion";
     }
 
     @Override
@@ -23,9 +23,9 @@ public class Reload extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
         if (player.hasPermission("areaconnect.reload")) {
-            player.sendMessage(ChatColor.YELLOW + "Recargando configuración...");
+            player.sendMessage(ChatColor.YELLOW + "Recargando configuracion...");
             Configuration.reload();
-            player.sendMessage(ChatColor.GREEN + "Configuración recargada.");
+            player.sendMessage(ChatColor.GREEN + "Configuracion recargada.");
         } else {
             player.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
         }
