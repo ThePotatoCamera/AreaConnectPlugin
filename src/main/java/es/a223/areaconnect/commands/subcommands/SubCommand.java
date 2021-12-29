@@ -2,6 +2,9 @@ package es.a223.areaconnect.commands.subcommands;
 
 import org.bukkit.entity.Player;
 
+/**
+ * Base de los subcomandos.
+ */
 public abstract class SubCommand {
     public abstract String getName();
     public abstract String getDescription();

@@ -1,2 +1,10 @@
 # Habilita la conexión con la base de datos de los usuarios de Discord
 DiscordConnection: false
+
+# Configuraciones de la BBDD
+database:
+  host: localhost
+  port: 3306
+  database: areaconnect
+  user: root
+  password: root

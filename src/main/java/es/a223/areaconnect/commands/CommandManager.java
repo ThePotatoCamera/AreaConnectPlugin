@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Command manager para gestionar los subcomandos del plugin.
+ */
 public class CommandManager implements CommandExecutor {
 
     private ArrayList<SubCommand> subCommands = new ArrayList<>();
@@ -23,9 +26,9 @@ public class CommandManager implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length == 0) {
-                player.sendMessage(ChatColor.YELLOW + "Comandos disponibles:");
+                player.sendMessage(ChatColor.GOLD + "-= Comandos disponibles de AreaConnect =-");
                 for (SubCommand subCommand : subCommands) {
-                    player.sendMessage(ChatColor.YELLOW + "/areaconnect " + subCommand.getName() + ": " + ChatColor.WHITE + subCommand.getDescription());
+                    player.sendMessage(ChatColor.GOLD + "/areaconnect " + subCommand.getName() + ": " + ChatColor.WHITE + subCommand.getDescription());
                 }
             }
             else {
