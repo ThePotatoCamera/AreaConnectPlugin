@@ -2,7 +2,6 @@ package es.a223.areaconnect;
 
 import es.a223.areaconnect.commands.CommandManager;
 import es.a223.areaconnect.configuration.Configuration;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mariadb.jdbc.MariaDbPoolDataSource;
 
@@ -11,6 +10,8 @@ import java.sql.Statement;
 import java.util.Objects;
 
 public class AreaConnect extends JavaPlugin {
+    public MariaDbPoolDataSource poolDataSource = new MariaDbPoolDataSource();
+
     @Override
     public void onEnable() {
 
@@ -19,17 +20,19 @@ public class AreaConnect extends JavaPlugin {
         saveDefaultConfig();
 
         // Setup config
+        getLogger().finer("Recuperando configuracion...");
         Configuration.setup();
         Configuration.get().addDefault("DiscordConnection", false);
         Configuration.get().options().copyDefaults(true);
         Configuration.save();
 
         // Init commands
+        getLogger().finer("Inicializando comandos...");
         CommandManager commands = new CommandManager();
         Objects.requireNonNull(getCommand("areaconnect")).setExecutor(commands);
 
         // MariaDB connection
-        MariaDbPoolDataSource poolDataSource = new MariaDbPoolDataSource();
+        getLogger().info("Conectando a base de datos...");
 
         try {
             poolDataSource.setServerName(Configuration.get().getString("database.host"));
@@ -41,6 +44,8 @@ public class AreaConnect extends JavaPlugin {
             getLogger().severe("Error al conectar con la base de datos: " + e.getMessage());
         }
 
+        // Create tables
+        getLogger().finest("Creando tablas...");
         try {
             Statement statement = poolDataSource.getConnection().createStatement();
             statement.addBatch("CREATE TABLE IF NOT EXISTS `users` (" +
@@ -59,6 +64,7 @@ public class AreaConnect extends JavaPlugin {
                     "primary key, " +
                     "user_id int null, " +
                     "discord_id varchar(255) null, " +
+                    "code       int          null," +
                     "constraint user_link_discord_id_uindex " +
                     "unique (discord_id), " +
                     "constraint user_link_id_uindex " +
@@ -76,11 +82,13 @@ public class AreaConnect extends JavaPlugin {
             getLogger().severe("Error al crear la tabla: " + e.getMessage());
         }
 
-        getLogger().info(ChatColor.GREEN + "AreaConnect habilitado con exito!");
+        getLogger().info("AreaConnect habilitado con exito!");
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("AreaConnect deshabilitado, buenas noches.");
+        getLogger().info("Cerrando conexion con la base de datos...");
+        poolDataSource.close();
+        getLogger().info("AreaConnect deshabilitado.");
     }
 }
