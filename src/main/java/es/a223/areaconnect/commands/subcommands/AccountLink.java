@@ -31,10 +31,6 @@ public class AccountLink extends SubCommand{
         int length = 6;
         StringBuilder code = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            if (i % 3 == 0 && i != 0) {
-                code.append("-");
-                i ++;
-            }
             int random = (int) (Math.random() * 10);
             code.append(random);
         }
