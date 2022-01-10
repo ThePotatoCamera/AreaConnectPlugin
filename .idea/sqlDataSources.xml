@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="49c8e3e8-c5b4-4ada-853a-cfac077739d0" name="areaconnect@localhost Mapping">
+      <data-sources db="058ce2c9-fd3a-4fce-b9fa-699c1bbd4738" ddl="b4bd0765-4654-48b9-9d45-825c0ec364cf" />
+      <scope>
+        <node kind="schema" qname="areaconnect" />
+      </scope>
+    </mapping>
+  </component>
+</project>
