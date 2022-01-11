@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.net.ssl.HandshakeCompletedEvent;
 import java.util.Objects;
 
 public class AreaConnect extends JavaPlugin {
@@ -35,7 +36,7 @@ public class AreaConnect extends JavaPlugin {
         getLogger().info("Configurando la base de datos...");
 
         try {
-            Session testingSession = this.dbConnection().openSession();
+            Session testingSession = dbConnection().openSession();
             if (!testingSession.isOpen()) {
                 throw new HibernateException("No se ha podido conectar a la base de datos.");
             }
@@ -57,7 +58,7 @@ public class AreaConnect extends JavaPlugin {
     }
 
 
-    public final SessionFactory dbConnection() {
+    public static SessionFactory dbConnection() {
         org.hibernate.cfg.Configuration hibconfig = new org.hibernate.cfg.Configuration();
         hibconfig.setProperty("hibernate.connection.datasource", "jdbc:mariadb://" + Configuration.get().getString("database.host") + ":" + Configuration.get().getString("database.port") + "/" + Configuration.get().getString("database.database"));
         hibconfig.setProperty("hibernate.connection.username", Configuration.get().getString("database.user"));

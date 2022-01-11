@@ -1,7 +1,11 @@
 package es.a223.areaconnect.commands.subcommands;
 
+import es.a223.areaconnect.AreaConnect;
+import es.a223.areaconnect.models.UserLink;
+import es.a223.areaconnect.models.Users;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.hibernate.Session;
 
 public class AccountLink extends SubCommand{
     @Override
@@ -21,9 +25,25 @@ public class AccountLink extends SubCommand{
 
     @Override
     public void perform(Player player, String[] args) {
+        String linkCode = generateCode();
+        Session dbSession = AreaConnect.dbConnection().openSession();
+
+        Users userObject = new Users();
+        userObject.setUserId(player.getUniqueId().toString());
+        userObject.setUsername(player.getName());
+        dbSession.save(userObject);
+
+        UserLink userLinkObject = new UserLink();
+        userLinkObject.setCode(linkCode);
+        userLinkObject.setMinecraftUser(userObject);
+        dbSession.save(userLinkObject);
+
+        dbSession.flush();
+        dbSession.close();
+
         if (player.hasPermission("areaconnect.link")) {
             player.sendMessage(ChatColor.GREEN + "Para vincular tu cuenta, ve al servidor de Discord (" + ChatColor.YELLOW + "https://discord.a223.es" + ChatColor.GREEN + ") y utiliza el siguiente comando:");
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + this.generateCode());
+            player.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + linkCode);
         }
     }
     

@@ -11,20 +11,20 @@ public class UserLink {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users userId;
+    @JoinColumn(name = "minecraft_user")
+    private Users minecraftUser;
 
     @Column(name = "discord_id")
     private String discordId;
 
     @Column(name = "code")
-    private Integer code;
+    private String code;
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
@@ -36,12 +36,12 @@ public class UserLink {
         this.discordId = discordId;
     }
 
-    public Users getUserId() {
-        return userId;
+    public Users getMinecraftUser() {
+        return minecraftUser;
     }
 
-    public void setUserId(Users userId) {
-        this.userId = userId;
+    public void setMinecraftUser(Users minecraftUser) {
+        this.minecraftUser = minecraftUser;
     }
 
     public Integer getId() {
