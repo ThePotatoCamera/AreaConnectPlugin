@@ -3,7 +3,9 @@ package es.a223.areaconnect.commands.subcommands;
 import es.a223.areaconnect.AreaConnect;
 import es.a223.areaconnect.models.UserLink;
 import es.a223.areaconnect.models.Users;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
 
@@ -25,6 +27,13 @@ public class AccountLink extends SubCommand{
 
     @Override
     public void perform(Player player, String[] args) {
+
+        if (player == null) {
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            console.sendMessage(ChatColor.RED + "Este comando solo puede ser ejecutado por un jugador.");
+            return;
+        }
+
         String linkCode = generateCode();
         Session dbSession = AreaConnect.dbConnection().openSession();
 
