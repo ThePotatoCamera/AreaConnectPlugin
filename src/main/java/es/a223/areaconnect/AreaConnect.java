@@ -59,7 +59,7 @@ public class AreaConnect extends JavaPlugin {
 
     public static SessionFactory dbConnection() {
         org.hibernate.cfg.Configuration hibconfig = new org.hibernate.cfg.Configuration();
-        hibconfig.setProperty("hibernate.connection.datasource", "jdbc:mariadb://" + Configuration.get().getString("database.host") + ":" + Configuration.get().getString("database.port") + "/" + Configuration.get().getString("database.database"));
+        hibconfig.setProperty("hibernate.connection.url", "jdbc:mariadb://" + Configuration.get().getString("database.host") + ":" + Configuration.get().getString("database.port") + "/" + Configuration.get().getString("database.database"));
         hibconfig.setProperty("hibernate.connection.username", Configuration.get().getString("database.user"));
         hibconfig.setProperty("hibernate.connection.password", Configuration.get().getString("database.password"));
         hibconfig.setProperty("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
