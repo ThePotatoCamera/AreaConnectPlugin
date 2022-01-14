@@ -18,6 +18,9 @@ public class CommandManager implements CommandExecutor {
 
     private ArrayList<SubCommand> subCommands = new ArrayList<>();
 
+    /**
+     * Instantiates a new Command manager.
+     */
     public CommandManager() {
         subCommands.add(new Reload());
         subCommands.add(new AccountLink());
@@ -45,6 +48,11 @@ public class CommandManager implements CommandExecutor {
     }
 
 
+    /**
+     * Gets subcommands.
+     *
+     * @return the subcommands
+     */
     public ArrayList<SubCommand> getSubcommands() {
         return subCommands;
     }

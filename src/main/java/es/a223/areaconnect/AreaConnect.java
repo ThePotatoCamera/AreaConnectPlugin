@@ -10,6 +10,9 @@ import org.hibernate.SessionFactory;
 
 import java.util.Objects;
 
+/**
+ * El plugin de AreaConnect
+ */
 public class AreaConnect extends JavaPlugin {
 
     @Override
@@ -57,6 +60,11 @@ public class AreaConnect extends JavaPlugin {
     }
 
 
+    /**
+     * Db connection session factory.
+     *
+     * @return the session factory
+     */
     public static SessionFactory dbConnection() {
         org.hibernate.cfg.Configuration hibconfig = new org.hibernate.cfg.Configuration();
         hibconfig.setProperty("hibernate.connection.url", "jdbc:mariadb://" + Configuration.get().getString("database.host") + ":" + Configuration.get().getString("database.port") + "/" + Configuration.get().getString("database.database"));

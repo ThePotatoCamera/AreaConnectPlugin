@@ -4,6 +4,9 @@ import es.a223.areaconnect.configuration.Configuration;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+/**
+ * Comando de recarga de configuración
+ */
 public class Reload extends SubCommand {
     @Override
     public String getName() {

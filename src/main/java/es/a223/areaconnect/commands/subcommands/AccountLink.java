@@ -9,6 +9,9 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
 
+/**
+ * Comando para enlazar cuentas
+ */
 public class AccountLink extends SubCommand{
     @Override
     public String getName() {
