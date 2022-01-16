@@ -10,7 +10,7 @@ commands:
     aliases:
       - area-connect
       - a223
-    usage: /<command> [reload | link]
+    usage: /<command> [reload | link | adddinero]
     permission: areaconnect.reload
 permissions:
   areaconnect.*:
@@ -19,9 +19,16 @@ permissions:
     children:
       - areaconnect.reload
       - areaconnect.link
+      - areaconnect.adddinero
   areaconnect.reload:
     description: 'Permite recargar el plugin'
     default: op
   areaconnect.link:
     description: 'Permite enlazar una cuenta de Minecraft a una cuenta de Discord'
     default: true
+  areaconnect.unlink:
+    description: 'Permite desenlazar una cuenta de Minecraft de una cuenta de Discord'
+    default: true
+  areaconnect.adddinero:
+    description: 'Permite añadir dinero a un usuario.'
+    default: op

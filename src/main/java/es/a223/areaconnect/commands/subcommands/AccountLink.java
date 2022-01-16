@@ -1,8 +1,8 @@
 package es.a223.areaconnect.commands.subcommands;
 
 import es.a223.areaconnect.AreaConnect;
-import es.a223.areaconnect.models.UserLink;
-import es.a223.areaconnect.models.Users;
+import es.a223.areaconnect.entities.UserLink;
+import es.a223.areaconnect.entities.Users;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
@@ -31,6 +31,11 @@ public class AccountLink extends SubCommand{
     @Override
     public void perform(Player player, String[] args) {
 
+        if (!player.hasPermission("areaconnect.link")) {
+            player.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando");
+            return;
+        }
+
         if (player == null) {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             console.sendMessage(ChatColor.RED + "Este comando solo puede ser ejecutado por un jugador.");
@@ -50,13 +55,11 @@ public class AccountLink extends SubCommand{
         userLinkObject.setMinecraftUser(userObject);
         dbSession.save(userLinkObject);
 
-        dbSession.flush();
         dbSession.close();
 
-        if (player.hasPermission("areaconnect.link")) {
-            player.sendMessage(ChatColor.GREEN + "Para vincular tu cuenta, ve al servidor de Discord (" + ChatColor.YELLOW + "https://discord.a223.es" + ChatColor.GREEN + ") y utiliza el siguiente comando:");
-            player.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + linkCode);
-        }
+        player.sendMessage(ChatColor.GREEN + "Para vincular tu cuenta, ve al servidor de Discord (" + ChatColor.YELLOW + "https://discord.a223.es" + ChatColor.GREEN + ") y utiliza el siguiente comando:");
+        player.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + linkCode);
+
     }
     
     private String generateCode() {

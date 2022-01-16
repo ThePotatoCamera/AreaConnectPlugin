@@ -1,4 +1,4 @@
-package es.a223.areaconnect.models;
+package es.a223.areaconnect.entities;
 
 import javax.persistence.*;
 

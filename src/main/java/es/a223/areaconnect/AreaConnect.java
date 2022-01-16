@@ -38,11 +38,12 @@ public class AreaConnect extends JavaPlugin {
         getLogger().info("Configurando la base de datos...");
 
         try {
-            Session testingSession = dbConnection().openSession();
-            if (!testingSession.isOpen()) {
+            Session setupSession = dbConnection().openSession();
+            if (!setupSession.isOpen()) {
                 throw new HibernateException("No se ha podido conectar a la base de datos.");
             }
-            testingSession.close();
+
+            setupSession.close();
         } catch (HibernateException e) {
             getLogger().severe(ChatColor.RED + "Ha habido un error con la base de datos. Deshabilitando para evitar problemas.");
             getLogger().severe("Deberias revisar la configuracion de la base de datos.");
@@ -70,11 +71,12 @@ public class AreaConnect extends JavaPlugin {
         hibconfig.setProperty("hibernate.connection.url", "jdbc:mariadb://" + Configuration.get().getString("database.host") + ":" + Configuration.get().getString("database.port") + "/" + Configuration.get().getString("database.database"));
         hibconfig.setProperty("hibernate.connection.username", Configuration.get().getString("database.user"));
         hibconfig.setProperty("hibernate.connection.password", Configuration.get().getString("database.password"));
+        hibconfig.setProperty("hibernate.hbm2ddl.auto", "update");
         hibconfig.setProperty("hibernate.dialect", "org.hibernate.dialect.MariaDBDialect");
         hibconfig.setProperty("hibernate.connection.driver_class", "org.mariadb.jdbc.Driver");
         hibconfig.setProperty("hibernate.show_sql", "true");
-        hibconfig.addAnnotatedClass(es.a223.areaconnect.models.Users.class);
-        hibconfig.addAnnotatedClass(es.a223.areaconnect.models.UserLink.class);
+        hibconfig.addAnnotatedClass(es.a223.areaconnect.entities.Users.class);
+        hibconfig.addAnnotatedClass(es.a223.areaconnect.entities.UserLink.class);
 
         return hibconfig.buildSessionFactory();
     }

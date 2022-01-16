@@ -1,4 +1,4 @@
-package es.a223.areaconnect.models;
+package es.a223.areaconnect.entities;
 
 import javax.persistence.*;
 
@@ -9,15 +9,11 @@ import javax.persistence.*;
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @Column(name = "userId", nullable = false)
+    private String userId;
 
     @Column(name = "username")
     private String username;
-
-    @Column(name = "userId", nullable = false)
-    private String userId;
 
     /**
      * Gets user id.
@@ -53,23 +49,5 @@ public class Users {
      */
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

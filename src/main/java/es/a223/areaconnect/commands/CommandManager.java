@@ -1,8 +1,6 @@
 package es.a223.areaconnect.commands;
 
-import es.a223.areaconnect.commands.subcommands.AccountLink;
-import es.a223.areaconnect.commands.subcommands.Reload;
-import es.a223.areaconnect.commands.subcommands.SubCommand;
+import es.a223.areaconnect.commands.subcommands.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,6 +22,8 @@ public class CommandManager implements CommandExecutor {
     public CommandManager() {
         subCommands.add(new Reload());
         subCommands.add(new AccountLink());
+        subCommands.add(new AccountUnlink());
+        subCommands.add(new AddDinero());
     }
 
     @Override
