@@ -72,7 +72,7 @@ public class AccountUnlink extends SubCommand {
         EntityManager em = AreaConnect.dbConnection().createEntityManager();
         em.getTransaction().begin();
 
-        Query query = em.createNativeQuery("DELETE FROM areaconnect.user_link WHERE minecraft_user = :minecraft_user");
+        Query query = em.createQuery("DELETE FROM UserLink WHERE minecraftUser = :minecraft_user");
         query.setParameter("minecraft_user", minecraft_user);
         query.executeUpdate();
 

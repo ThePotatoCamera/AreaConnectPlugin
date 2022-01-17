@@ -36,7 +36,7 @@ public class AccountLink extends SubCommand{
             return;
         }
 
-        if (player == null) {
+        if (player instanceof ConsoleCommandSender) {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             console.sendMessage(ChatColor.RED + "Este comando solo puede ser ejecutado por un jugador.");
             return;

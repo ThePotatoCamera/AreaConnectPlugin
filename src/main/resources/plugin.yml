@@ -19,7 +19,9 @@ permissions:
     children:
       - areaconnect.reload
       - areaconnect.link
-      - areaconnect.adddinero
+      - areaconnect.addmoney
+      - areaconnect.removemoney
+      - areaconnect.setmoney
   areaconnect.reload:
     description: 'Permite recargar el plugin'
     default: op
@@ -29,6 +31,12 @@ permissions:
   areaconnect.unlink:
     description: 'Permite desenlazar una cuenta de Minecraft de una cuenta de Discord'
     default: true
-  areaconnect.adddinero:
+  areaconnect.addmoney:
     description: 'Permite añadir dinero a un usuario.'
+    default: op
+  areaconnect.removemoney:
+    description: 'Permite quitar dinero a un usuario.'
+    default: op
+  areaconnect.setmoney:
+    description: 'Permite cambiar el dinero de un usuario.'
     default: op

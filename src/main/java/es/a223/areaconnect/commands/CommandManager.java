@@ -23,7 +23,9 @@ public class CommandManager implements CommandExecutor {
         subCommands.add(new Reload());
         subCommands.add(new AccountLink());
         subCommands.add(new AccountUnlink());
-        subCommands.add(new AddDinero());
+        subCommands.add(new AddMoney());
+        subCommands.add(new RemoveMoney());
+        subCommands.add(new SetMoney());
     }
 
     @Override
