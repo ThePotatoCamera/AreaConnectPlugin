@@ -57,19 +57,13 @@ public class AccountUnlink extends SubCommand {
             return;
         }
 
-        if (player == null) {
+        if (player instanceof ConsoleCommandSender) {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             console.sendMessage(ChatColor.RED + "Este comando solo puede ser ejecutado por un jugador.");
             return;
         }
 
-        Session dbSession = AreaConnect.dbConnection().openSession();
-
-        Users userObject = dbSession.get(Users.class, player.getUniqueId().toString());
-        deleteLink(userObject.getUserId());
-
-        dbSession.close();
-
+        deleteLink(player.getUniqueId().toString());
         player.sendMessage(ChatColor.GREEN + "Has desvinculado tu cuenta de Minecraft de Discord.");
     }
 

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Clase de la entidad Users
  */
 @Entity
-@Table(name = "users")
+@Table(name = "areacon_users")
 public class Users {
     @Id
     @Column(name = "userId", nullable = false)
@@ -49,5 +49,16 @@ public class Users {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Basic
+    private Integer money;
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
     }
 }

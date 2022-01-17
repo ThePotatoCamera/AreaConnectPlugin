@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Clase de la entidad UserLink
  */
 @Entity
-@Table(name = "user_link")
+@Table(name = "areacon_user_link")
 public class UserLink {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
