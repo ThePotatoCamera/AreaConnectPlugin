@@ -4,6 +4,7 @@ import es.a223.areaconnect.AreaConnect;
 import es.a223.areaconnect.entities.Users;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
@@ -11,6 +12,7 @@ import org.hibernate.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.Objects;
 
 public class AccountUnlink extends SubCommand {
   /**
@@ -50,21 +52,21 @@ public class AccountUnlink extends SubCommand {
    * @param args   the args
    */
   @Override
-  public void perform(Player player, String[] args) {
+  public void perform(CommandSender sender, String[] args) {
 
-    if (!player.hasPermission("areaconnect.unlink")) {
-      player.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando");
+    if (!sender.hasPermission("areaconnect.unlink")) {
+      sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando");
       return;
     }
 
-    if (player instanceof ConsoleCommandSender) {
+    if (sender instanceof ConsoleCommandSender) {
       ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
       console.sendMessage(ChatColor.RED + "Este comando solo puede ser ejecutado por un jugador.");
       return;
     }
 
-    deleteLink(player.getUniqueId().toString());
-    player.sendMessage(ChatColor.GREEN + "Has desvinculado tu cuenta de Minecraft de Discord.");
+    deleteLink(Objects.requireNonNull(sender.getServer().getPlayer(sender.getName())).getUniqueId().toString());
+    sender.sendMessage(ChatColor.GREEN + "Has desvinculado tu cuenta de Minecraft de Discord.");
   }
 
   @Transactional

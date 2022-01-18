@@ -3,6 +3,7 @@ package es.a223.areaconnect.commands.subcommands;
 import es.a223.areaconnect.AreaConnect;
 import es.a223.areaconnect.entities.Users;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
@@ -41,34 +42,34 @@ public class AddMoney extends SubCommand {
   /**
    * Perform.
    *
-   * @param player the player
+   * @param sender the sender
    * @param args   the args
    */
   @Override
-  public void perform(Player player, String[] args) {
+  public void perform(CommandSender sender, String[] args) {
     if (args.length < 2) {
-      player.sendMessage(ChatColor.GOLD + "Uso: " + getUsage());
+      sender.sendMessage(ChatColor.GOLD + "Uso: " + getUsage());
       return;
     }
-    if (!player.hasPermission("areaconnect.addmoney")) {
-      player.sendMessage(ChatColor.RED + "No tienes permiso para usar este comando");
+    if (!sender.hasPermission("areaconnect.addmoney")) {
+      sender.sendMessage(ChatColor.RED + "No tienes permiso para usar este comando");
       return;
     }
     Player target;
     int money;
-    if (player.getServer().getPlayer(args[1]) != null) {
-      target = player.getServer().getPlayer(args[1]);
+    if (sender.getServer().getPlayer(args[1]) != null) {
+      target = sender.getServer().getPlayer(args[1]);
       money = Integer.parseInt(args[2]);
-    } else if (player instanceof ConsoleCommandSender) {
-      if (player.getServer().getPlayer(args[1]) == null) {
-        player.sendMessage(ChatColor.RED + "Debes especificar un jugador desde la consola.");
+    } else if (sender instanceof ConsoleCommandSender) {
+      if (sender.getServer().getPlayer(args[1]) == null) {
+        sender.sendMessage(ChatColor.RED + "Debes especificar un jugador desde la consola.");
         return;
       }
-      target = player.getServer().getPlayer(args[1]);
+      target = sender.getServer().getPlayer(args[1]);
       money = Integer.parseInt(args[2]);
     }
     else {
-      target = player;
+      target = (Player) sender;
       money = Integer.parseInt(args[1]);
     }
     assert target != null;
@@ -81,6 +82,6 @@ public class AddMoney extends SubCommand {
     session.save(user);
     session.close();
 
-    player.sendMessage(ChatColor.GREEN + "Se han añadido " + money + " a " + target.getName());
+    sender.sendMessage(ChatColor.GREEN + "Se han añadido " + money + " a " + target.getName());
   }
 }

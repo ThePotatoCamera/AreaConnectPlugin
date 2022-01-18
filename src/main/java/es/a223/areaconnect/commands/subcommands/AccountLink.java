@@ -5,9 +5,12 @@ import es.a223.areaconnect.entities.UserLink;
 import es.a223.areaconnect.entities.Users;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
+
+import java.util.Objects;
 
 /**
  * Comando para enlazar cuentas
@@ -29,14 +32,14 @@ public class AccountLink extends SubCommand{
   }
 
   @Override
-  public void perform(Player player, String[] args) {
+  public void perform(CommandSender sender, String[] args) {
 
-    if (!player.hasPermission("areaconnect.link")) {
-      player.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando");
+    if (!sender.hasPermission("areaconnect.link")) {
+      sender.sendMessage(ChatColor.RED + "No tienes permisos para usar este comando");
       return;
     }
 
-    if (player instanceof ConsoleCommandSender) {
+    if (sender instanceof ConsoleCommandSender) {
       ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
       console.sendMessage(ChatColor.RED + "Este comando solo puede ser ejecutado por un jugador.");
       return;
@@ -46,8 +49,8 @@ public class AccountLink extends SubCommand{
     Session dbSession = AreaConnect.dbConnection().openSession();
 
     Users userObject = new Users();
-    userObject.setUserId(player.getUniqueId().toString());
-    userObject.setUsername(player.getName());
+    userObject.setUserId(Objects.requireNonNull(sender.getServer().getPlayer(sender.getName())).getUniqueId().toString());
+    userObject.setUsername(sender.getName());
     dbSession.save(userObject);
 
     UserLink userLinkObject = new UserLink();
@@ -57,8 +60,8 @@ public class AccountLink extends SubCommand{
 
     dbSession.close();
 
-    player.sendMessage(ChatColor.GREEN + "Para vincular tu cuenta, ve al servidor de Discord (" + ChatColor.YELLOW + "https://discord.a223.es" + ChatColor.GREEN + ") y utiliza el siguiente comando:");
-    player.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + linkCode);
+    sender.sendMessage(ChatColor.GREEN + "Para vincular tu cuenta, ve al servidor de Discord (" + ChatColor.YELLOW + "https://discord.a223.es" + ChatColor.GREEN + ") y utiliza el siguiente comando:");
+    sender.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + linkCode);
 
   }
 

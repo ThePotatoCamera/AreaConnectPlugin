@@ -3,6 +3,7 @@ package es.a223.areaconnect.commands.subcommands;
 import es.a223.areaconnect.AreaConnect;
 import es.a223.areaconnect.entities.Users;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
@@ -45,7 +46,7 @@ public class RemoveMoney extends SubCommand {
    * @param args   the args
    */
   @Override
-  public void perform(Player player, String[] args) {
+  public void perform(CommandSender player, String[] args) {
     if (args.length < 2) {
       player.sendMessage(ChatColor.GOLD + "Uso: " + getUsage());
       return;
@@ -68,7 +69,7 @@ public class RemoveMoney extends SubCommand {
       money = Integer.parseInt(args[2]);
     }
     else {
-      target = player;
+      target = (Player) player;
       money = Integer.parseInt(args[1]);
     }
     assert target != null;

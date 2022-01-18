@@ -2,6 +2,7 @@ package es.a223.areaconnect.commands.subcommands;
 
 import es.a223.areaconnect.configuration.Configuration;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -24,12 +25,12 @@ public class Reload extends SubCommand {
   }
 
   @Override
-  public void perform(Player player, String[] args) {
-    if (!player.hasPermission("areaconnect.reload")) {
-      player.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
+  public void perform(CommandSender sender, String[] args) {
+    if (!sender.hasPermission("areaconnect.reload")) {
+      sender.sendMessage(ChatColor.RED + "No tienes permiso para ejecutar este comando.");
     }
-    player.sendMessage(ChatColor.YELLOW + "Recargando configuracion...");
+    sender.sendMessage(ChatColor.YELLOW + "Recargando configuracion...");
     Configuration.reload();
-    player.sendMessage(ChatColor.GREEN + "Configuracion recargada.");
+    sender.sendMessage(ChatColor.GREEN + "Configuracion recargada.");
   }
 }

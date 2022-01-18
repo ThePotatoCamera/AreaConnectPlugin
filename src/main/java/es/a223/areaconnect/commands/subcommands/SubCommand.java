@@ -1,5 +1,6 @@
 package es.a223.areaconnect.commands.subcommands;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
@@ -33,5 +34,5 @@ public abstract class SubCommand {
    * @param player the player
    * @param args   the args
    */
-  public abstract void perform(Player player, String[] args);
+  public abstract void perform(CommandSender player, String[] args);
 }
