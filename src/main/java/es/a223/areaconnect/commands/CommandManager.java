@@ -5,15 +5,18 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Command manager para gestionar los subcomandos del plugin.
  */
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements CommandExecutor, TabCompleter {
 
+  List<String> completions = new ArrayList<String>();
   private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
   /**
@@ -54,5 +57,47 @@ public class CommandManager implements CommandExecutor {
    */
   public ArrayList<SubCommand> getSubcommands() {
     return subCommands;
+  }
+
+  /**
+   * Requests a list of possible completions for a command argument.
+   *
+   * @param sender  Source of the command.  For players tab-completing a
+   *                command inside of a command block, this will be the player, not
+   *                the command block.
+   * @param command Command which was executed
+   * @param alias   The alias used
+   * @param args    The arguments passed to the command, including final
+   *                partial argument to be completed and command label
+   * @return A List of possible completions for the final argument, or null
+   * to default to the command executor
+   */
+  @Override
+  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    List<String> completions = new ArrayList<String>();
+    for (SubCommand subCommand : this.getSubcommands()) {
+      completions.add(subCommand.getName());
+    }
+
+    List<String> results = new ArrayList<String>();
+
+    if (args.length == 1) {
+      for (String c : completions) {
+        if (c.toLowerCase().startsWith(args[0].toLowerCase())) {
+          results.add(c);
+        }
+      }
+      return results;
+    }
+
+    if (args.length > 1) {
+      for (SubCommand subCommand : this.getSubcommands()) {
+        if (args[0].equalsIgnoreCase(subCommand.getName())) {
+          return subCommand.getCompletions(sender, args.length, args);
+        }
+      }
+    }
+
+    return null;
   }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Base de los subcomandos.
  */
-public abstract class SubCommand implements TabCompleter {
+public abstract class SubCommand {
   /**
    * Gets name.
    *
@@ -22,7 +22,6 @@ public abstract class SubCommand implements TabCompleter {
    * @return the description
    */
   public abstract String getDescription();
-
   /**
    * Gets usage.
    *
@@ -37,4 +36,6 @@ public abstract class SubCommand implements TabCompleter {
    * @param args   the args
    */
   public abstract void perform(CommandSender player, String[] args);
+
+  public abstract List<String> getCompletions(CommandSender sender, int argindex, String[] args);
 }

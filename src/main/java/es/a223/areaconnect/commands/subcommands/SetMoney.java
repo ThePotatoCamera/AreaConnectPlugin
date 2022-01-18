@@ -3,10 +3,16 @@ package es.a223.areaconnect.commands.subcommands;
 import es.a223.areaconnect.AreaConnect;
 import es.a223.areaconnect.entities.Users;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class SetMoney extends SubCommand {
   /**
@@ -67,8 +73,7 @@ public class SetMoney extends SubCommand {
       }
       target = player.getServer().getPlayer(args[1]);
       money = Integer.parseInt(args[2]);
-    }
-    else {
+    } else {
       target = (Player) player;
       money = Integer.parseInt(args[1]);
     }
@@ -83,5 +88,34 @@ public class SetMoney extends SubCommand {
     session.close();
 
     player.sendMessage(ChatColor.GREEN + "Se ha configurado a " + money + " el dinero de " + target.getName());
+  }
+
+  @Override
+  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
+    List<String> completions = new ArrayList<String>();
+    for (Player player : sender.getServer().getOnlinePlayers()) {
+      completions.add(player.getName());
+    }
+
+    List<String> results = new ArrayList<String>();
+
+    if (argindex == 2) {
+      for (String c : completions) {
+        if (c.toLowerCase().startsWith(args[1].toLowerCase())) {
+          results.add(c);
+        }
+      }
+      results.add("1"); results.add("10");
+      results.add("100"); results.add("1000");
+      return results;
+    }
+
+    if (argindex == 3) {
+      results.add("1"); results.add("10");
+      results.add("100"); results.add("1000");
+      return results;
+    }
+
+    return null;
   }
 }

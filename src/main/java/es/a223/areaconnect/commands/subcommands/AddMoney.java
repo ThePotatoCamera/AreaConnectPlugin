@@ -3,10 +3,13 @@ package es.a223.areaconnect.commands.subcommands;
 import es.a223.areaconnect.AreaConnect;
 import es.a223.areaconnect.entities.Users;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
+
+import java.util.List;
 
 public class AddMoney extends SubCommand {
   /**
@@ -83,5 +86,23 @@ public class AddMoney extends SubCommand {
     session.close();
 
     sender.sendMessage(ChatColor.GREEN + "Se han añadido " + money + " a " + target.getName());
+  }
+
+  /**
+   * Requests a list of possible completions for a command argument.
+   *
+   * @param sender  Source of the command.  For players tab-completing a
+   *                command inside of a command block, this will be the player, not
+   *                the command block.
+   * @param command Command which was executed
+   * @param alias   The alias used
+   * @param args    The arguments passed to the command, including final
+   *                partial argument to be completed and command label
+   * @return A List of possible completions for the final argument, or null
+   * to default to the command executor
+   */
+  @Override
+  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+    return null;
   }
 }
