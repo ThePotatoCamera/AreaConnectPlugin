@@ -1,12 +1,14 @@
 package es.a223.areaconnect.commands.subcommands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import org.bukkit.command.TabCompleter;
+
+import java.util.List;
 
 /**
  * Base de los subcomandos.
  */
-public abstract class SubCommand {
+public abstract class SubCommand implements TabCompleter {
   /**
    * Gets name.
    *
