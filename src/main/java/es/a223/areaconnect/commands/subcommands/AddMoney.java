@@ -78,7 +78,7 @@ public class AddMoney extends SubCommand {
     assert target != null;
 
     Session session = AreaConnect.dbConnection().openSession();
-    Users user = session.get(Users.class, target.getUniqueId());
+    Users user = session.get(Users.class, target.getUniqueId().toString());
 
     user.setMoney(user.getMoney() + money);
 
