@@ -72,6 +72,11 @@ public class AccountUnlink extends SubCommand {
     sender.sendMessage(ChatColor.GREEN + "Has desvinculado tu cuenta de Minecraft de Discord.");
   }
 
+  @Override
+  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
+    return null;
+  }
+
   @Transactional
   private void deleteLink(String minecraft_user) {
     EntityManager em = AreaConnect.dbConnection().createEntityManager();
@@ -85,26 +90,4 @@ public class AccountUnlink extends SubCommand {
     em.close();
   }
 
-  /**
-   * Requests a list of possible completions for a command argument.
-   *
-   * @param sender  Source of the command.  For players tab-completing a
-   *                command inside of a command block, this will be the player, not
-   *                the command block.
-   * @param command Command which was executed
-   * @param alias   The alias used
-   * @param args    The arguments passed to the command, including final
-   *                partial argument to be completed and command label
-   * @return A List of possible completions for the final argument, or null
-   * to default to the command executor
-   */
-  @Override
-  public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-
-    List<String> completions = new ArrayList<String>();
-
-    completions.add("unlink");
-
-    return completions;
-  }
 }
