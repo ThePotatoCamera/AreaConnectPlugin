@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.bukkit.Bukkit.getServer;
 
-public class SetMoney extends SubCommand {
+public class SetMoney implements SubCommand {
   /**
    * Gets name.
    *
@@ -88,34 +88,5 @@ public class SetMoney extends SubCommand {
     session.close();
 
     player.sendMessage(ChatColor.GREEN + "Se ha configurado a " + money + " el dinero de " + target.getName());
-  }
-
-  @Override
-  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
-    List<String> completions = new ArrayList<String>();
-    for (Player player : sender.getServer().getOnlinePlayers()) {
-      completions.add(player.getName());
-    }
-
-    List<String> results = new ArrayList<String>();
-
-    if (argindex == 2) {
-      for (String c : completions) {
-        if (c.toLowerCase().startsWith(args[1].toLowerCase())) {
-          results.add(c);
-        }
-      }
-      results.add("1"); results.add("10");
-      results.add("100"); results.add("1000");
-      return results;
-    }
-
-    if (argindex == 3) {
-      results.add("1"); results.add("10");
-      results.add("100"); results.add("1000");
-      return results;
-    }
-
-    return null;
   }
 }

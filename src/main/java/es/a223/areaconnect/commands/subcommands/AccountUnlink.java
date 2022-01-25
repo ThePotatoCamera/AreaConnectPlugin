@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AccountUnlink extends SubCommand {
+public class AccountUnlink implements SubCommand {
   /**
    * Gets name.
    *
@@ -70,11 +70,6 @@ public class AccountUnlink extends SubCommand {
 
     deleteLink(Objects.requireNonNull(sender.getServer().getPlayer(sender.getName())).getUniqueId().toString());
     sender.sendMessage(ChatColor.GREEN + "Has desvinculado tu cuenta de Minecraft de Discord.");
-  }
-
-  @Override
-  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
-    return null;
   }
 
   @Transactional

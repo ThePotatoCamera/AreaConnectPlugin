@@ -11,7 +11,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class AddMoney extends SubCommand {
+public class AddMoney implements SubCommand {
   /**
    * Gets name.
    *
@@ -87,10 +87,4 @@ public class AddMoney extends SubCommand {
 
     sender.sendMessage(ChatColor.GREEN + "Se han añadido " + money + " a " + target.getName());
   }
-
-  @Override
-  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
-    return null;
-  }
-
 }

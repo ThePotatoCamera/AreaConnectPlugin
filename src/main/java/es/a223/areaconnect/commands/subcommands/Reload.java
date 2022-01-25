@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Comando de recarga de configuración
  */
-public class Reload extends SubCommand {
+public class Reload implements SubCommand {
   @Override
   public String getName() {
     return "reload";
@@ -36,10 +36,4 @@ public class Reload extends SubCommand {
     Configuration.reload();
     sender.sendMessage(ChatColor.GREEN + "Configuracion recargada.");
   }
-
-  @Override
-  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
-    return null;
-  }
-
 }

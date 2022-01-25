@@ -8,26 +8,26 @@ import java.util.List;
 /**
  * Base de los subcomandos.
  */
-public abstract class SubCommand {
+public interface SubCommand {
   /**
    * Gets name.
    *
    * @return the name
    */
-  public abstract String getName();
+  public String getName();
 
   /**
    * Gets description.
    *
    * @return the description
    */
-  public abstract String getDescription();
+  public String getDescription();
   /**
    * Gets usage.
    *
    * @return the usage
    */
-  public abstract String getUsage();
+  public String getUsage();
 
   /**
    * Perform.
@@ -35,7 +35,5 @@ public abstract class SubCommand {
    * @param player the player
    * @param args   the args
    */
-  public abstract void perform(CommandSender player, String[] args);
-
-  public abstract List<String> getCompletions(CommandSender sender, int argindex, String[] args);
+  public void perform(CommandSender player, String[] args);
 }

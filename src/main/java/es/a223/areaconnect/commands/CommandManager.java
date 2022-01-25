@@ -90,14 +90,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
       return results;
     }
 
-    if (args.length > 1) {
-      for (SubCommand subCommand : this.getSubcommands()) {
-        if (args[0].equalsIgnoreCase(subCommand.getName())) {
-          return subCommand.getCompletions(sender, args.length, args);
-        }
-      }
-    }
-
     return null;
   }
 }

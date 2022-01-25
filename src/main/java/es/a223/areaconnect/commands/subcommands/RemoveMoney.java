@@ -11,7 +11,7 @@ import org.hibernate.Session;
 
 import java.util.List;
 
-public class RemoveMoney extends SubCommand {
+public class RemoveMoney implements SubCommand {
   /**
    * Gets name.
    *
@@ -86,10 +86,5 @@ public class RemoveMoney extends SubCommand {
     session.close();
 
     player.sendMessage(ChatColor.GREEN + "Se han retirado " + money + " a " + target.getName());
-  }
-
-  @Override
-  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
-    return null;
   }
 }

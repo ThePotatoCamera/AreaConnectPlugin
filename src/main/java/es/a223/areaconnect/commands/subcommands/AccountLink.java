@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Comando para enlazar cuentas
  */
-public class AccountLink extends SubCommand{
+public class AccountLink implements SubCommand {
   @Override
   public String getName() {
     return "link";
@@ -65,11 +65,6 @@ public class AccountLink extends SubCommand{
     sender.sendMessage(ChatColor.GREEN + "Para vincular tu cuenta, ve al servidor de Discord (" + ChatColor.YELLOW + "https://discord.a223.es" + ChatColor.GREEN + ") y utiliza el siguiente comando:");
     sender.sendMessage(ChatColor.LIGHT_PURPLE + "/mclink " + ChatColor.BOLD + linkCode);
 
-  }
-
-  @Override
-  public List<String> getCompletions(CommandSender sender, int argindex, String[] args) {
-    return null;
   }
 
   private String generateCode() {
