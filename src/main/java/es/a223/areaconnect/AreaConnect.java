@@ -48,9 +48,9 @@ public class AreaConnect extends JavaPlugin {
       getLogger().severe(ChatColor.RED + "Ha habido un error con la base de datos. Deshabilitando para evitar problemas.");
       getLogger().severe("Deberias revisar la configuracion de la base de datos.");
       getLogger().severe(ChatColor.YELLOW + "Si todo esta correcto, reporta este error en " + ChatColor.AQUA + "https://github.com/area-223/AreaConnectPlugin/issues");
-      throw new RuntimeException(e);
+      getLogger().finest(e.toString());
+      getPluginLoader().disablePlugin(this);
     }
-
     getLogger().info("AreaConnect habilitado con exito!");
   }
 
@@ -59,7 +59,6 @@ public class AreaConnect extends JavaPlugin {
     getLogger().info("Cerrando conexion con la base de datos...");
     getLogger().info("AreaConnect deshabilitado.");
   }
-
 
   /**
    * Db connection session factory.
